@@ -18,9 +18,15 @@ import sqlite3
 import statistics
 import sys
 import time
+import warnings
 from datetime import datetime, timezone
 
 from gpiozero import DistanceSensor
+from gpiozero.exc import PWMSoftwareFallback
+
+# gpiozero suggests the pigpio pin factory for better timing, but pigpio doesn't
+# support the Pi 5. The median over several samples smooths out the jitter instead.
+warnings.filterwarnings("ignore", category=PWMSoftwareFallback)
 
 TRIGGER_PIN = int(os.environ.get("CROCK_TRIGGER_PIN", "23"))
 ECHO_PIN = int(os.environ.get("CROCK_ECHO_PIN", "24"))
