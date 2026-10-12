@@ -1,0 +1,28 @@
+# systemd unit for the crock level logger. The part after the @ is the Pi user to run as.
+#
+# Install:
+#   sudo cp crock-level@.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now crock-level@$USER
+#
+# Logs:
+#   journalctl -u crock-level@$USER -f
+
+[Unit]
+Description=Crock water level logger (JSN-SR04T)
+After=multi-user.target
+
+[Service]
+User=%i
+WorkingDirectory=/home/%i/crock-monitor
+# Distance from the sensor face to the bottom of the empty crock, in cm. Set this
+# to get water depth (level_cm) in addition to raw distance.
+Environment=CROCK_EMPTY_DISTANCE_CM=0
+Environment=CROCK_INTERVAL_SECONDS=60
+Environment=CROCK_DB_PATH=/home/%i/crock-level.db
+ExecStart=/usr/bin/python3 /home/%i/crock-monitor/crock_level.py
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
