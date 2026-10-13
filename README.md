@@ -165,6 +165,8 @@ It logs one reading per minute and starts again after a reboot.
 | `CROCK_INTERVAL_SECONDS` | `60` | time between logged readings |
 | `CROCK_SAMPLES` | `15` | samples per reading (median is stored) |
 | `CROCK_DB_PATH` | `~/crock-level.db` | SQLite file |
+| `CROCK_API_URL` | Pioneer API URL | where each reading is POSTed; set to empty to turn off |
+| `CROCK_ACCOUNT_NAME` | `mmalish1` | `accountName` sent to the API |
 
 ## Looking at the data
 

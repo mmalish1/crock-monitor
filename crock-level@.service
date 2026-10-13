@@ -17,8 +17,8 @@ User=%i
 WorkingDirectory=/home/%i/crock-monitor
 # Distance from the sensor face to the bottom of the empty crock, in cm. Set this
 # to get water depth (level_cm) in addition to raw distance.
-Environment=CROCK_EMPTY_DISTANCE_CM=0
-Environment=CROCK_INTERVAL_SECONDS=5
+Environment=CROCK_EMPTY_DISTANCE_CM=40
+Environment=CROCK_INTERVAL_SECONDS=15
 Environment=CROCK_DB_PATH=/home/%i/crock-level.db
 ExecStart=/usr/bin/python3 /home/%i/crock-monitor/crock_level.py
 Restart=on-failure
